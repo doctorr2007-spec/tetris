@@ -51,7 +51,7 @@ requirements = python3==3.11.9,kivy==2.1.0,cython==0.29.36,android
 # icon.filename = %(source.dir)s/data/icon.png
 
 # (str) Supported orientation (one of landscape, sensorLandscape, portrait or all)
-orientation = all
+orientation = portrait
 
 # (bool) Indicate if the application should be fullscreen or not
 fullscreen = 1
