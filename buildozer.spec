@@ -14,7 +14,7 @@ presplash.filename =
 source.dir = .
 source.include_exts = py,png,jpg,kv,atlas
 
-requirements = python3,kivy==2.1.0,android,cython
+requirements = python3==3.11.9, kivy==2.1.0, cython==0.29.36, android
 
 orientation = portrait
 android.permissions = INTERNET
