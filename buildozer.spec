@@ -35,8 +35,8 @@ version = 0.1
 # version.filename = %(source.dir)s/main.py
 
 # (list) Application requirements
-# !!! ЭТО САМАЯ ВАЖНАЯ ЧАСТЬ - ИСПРАВЛЕННЫЕ ВЕРСИИ !!!
-requirements = python3==3.11.9,kivy==2.1.0,cython==0.29.36,android
+# !!! ЭТО САМАЯ ВАЖНАЯ ЧАСТЬ - ПРАВИЛЬНЫЕ ВЕРСИИ !!!
+requirements = python3==3.11.9, kivy==2.1.0, cython==0.29.36, android
 
 # (str) Custom source folders for requirements
 # requirements.source.kivy = kivy
@@ -51,6 +51,7 @@ requirements = python3==3.11.9,kivy==2.1.0,cython==0.29.36,android
 # icon.filename = %(source.dir)s/data/icon.png
 
 # (str) Supported orientation (one of landscape, sensorLandscape, portrait or all)
+# !!! ИСПРАВЛЕНО: 'all' заменено на 'portrait' !!!
 orientation = portrait
 
 # (bool) Indicate if the application should be fullscreen or not
@@ -73,7 +74,6 @@ android.service = False
 # android.logcat_filters = *:S python:D
 
 # (int) Android API to use (30 - Android 11, 31 - Android 12, 33 - Android 13)
-# !!! ОСТАВЛЯЕМ 30 (СТАБИЛЬНО) !!!
 android.api = 30
 
 # (int) Minimum API required (21 = Android 5.0, достаточно для большинства устройств)
@@ -94,6 +94,15 @@ android.ndk = 25b
 
 # (str) Ant directory (if empty, it will be downloaded)
 # android.ant_path =
+
+# (int) Android NDK API to use (the minimum Android version your app will support)
+android.ndk_api = 21
+
+# (bool) Use AndroidX instead of Android Support Library
+android.use_androidx = true
+
+# (bool) Enable AndroidX auto import feature
+# android.enable_androidx_auto_import = false
 
 # (str) Android entry point (don't change)
 # android.entrypoint = org.kivy.android.PythonActivity
@@ -125,16 +134,6 @@ android.ndk = 25b
 # (list) List of Gradle repositories to add to the build
 # android.add_repositories =
 
-# (str) Android NDK API to use (the minimum Android version your app will support)
-# !!! ОСТАВЛЯЕМ 21 (МИНИМАЛЬНАЯ) !!!
-android.ndk_api = 21
-
-# (bool) Use AndroidX instead of Android Support Library
-android.use_androidx = true
-
-# (bool) Enable AndroidX auto import feature
-# android.enable_androidx_auto_import = false
-
 # (str) Android TV category (leave empty for non-TV)
 # android.tv_category = android.intent.category.LEANBACK_LAUNCHER
 
@@ -162,6 +161,9 @@ android.use_androidx = true
 
 # (str) Additional arguments to pass to p4a
 # android.extra_args = --enable-objc-arc
+
+# (bool) Accept Android SDK license automatically
+android.accept_sdk_license = True
 
 #
 # iOS specific
@@ -205,7 +207,7 @@ android.use_androidx = true
 # buildozer_cache = True
 
 # (bool) Indicate if the buildozer log should be verbose or not
-# buildozer_verbose = 1
+buildozer_verbose = 1
 
 # (str) Path to the application directory (where the main.py is)
 # app_dir = .
