@@ -14,7 +14,7 @@ presplash.filename =
 source.dir = .
 source.include_exts = py,png,jpg,kv,atlas
 
-requirements = python3,kivy==2.1.0,cython,android
+requirements = python3,kivy==2.1.0,android
 
 orientation = portrait
 android.permissions = INTERNET
@@ -30,8 +30,6 @@ android.accept_sdk_license = True
 log_level = 2
 android.archs = arm64-v8a, armeabi-v7a
 fullscreen = 1
-
-android.gradle_dependencies = com.android.support:support-annotations:28.0.0
 
 [buildozer]
 
