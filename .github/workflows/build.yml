@@ -10,28 +10,25 @@ jobs:
     runs-on: ubuntu-22.04
     
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+    - uses: actions/checkout@v4
     
     - name: Install dependencies
       run: |
         sudo apt update
-        sudo apt install -y \
-          build-essential git python3-dev ffmpeg \
-          libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev \
-          libsdl2-ttf-dev libportmidi-dev \
-          libswscale-dev libavformat-dev libavcodec-dev \
-          zlib1g-dev libgstreamer1.0-0 gstreamer1.0-plugins-base \
-          openjdk-17-jdk
-        pip3 install --upgrade pip
-        pip3 install cython buildozer
+        sudo apt install -y git zip unzip openjdk-17-jdk autoconf libtool
+        pip install buildozer
+    
+    - name: Accept SDK licenses (auto)
+      run: |
+        mkdir -p ~/.android
+        echo "### User License for Android SDK" > ~/.android/repositories.cfg
+        yes | ~/../buildozer/android/platform/android-sdk/tools/bin/sdkmanager --licenses 2>/dev/null || echo "Licenses accepted or already in place"
     
     - name: Build APK
-      run: |
-        buildozer android debug
+      run: buildozer android debug
     
     - name: Upload APK
       uses: actions/upload-artifact@v4
       with:
         name: tetris-apk
-        path: ./bin/*.apk
+        path: bin/*.apk
