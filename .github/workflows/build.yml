@@ -19,7 +19,7 @@ jobs:
         distribution: 'temurin'
         java-version: '17'
     
-    - name: Install dependencies
+    - name: Install system dependencies
       run: |
         sudo apt update
         sudo apt install -y \
@@ -27,19 +27,19 @@ jobs:
           libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev \
           libsdl2-ttf-dev libportmidi-dev \
           libswscale-dev libavformat-dev libavcodec-dev \
-          zlib1g-dev libgstreamer1.0-0
-        pip3 install --user cython
+          zlib1g-dev libgstreamer1.0-0 gstreamer1.0-plugins-base
     
-    - name: Build APK with Buildozer
-      uses: ArtemSBulgakov/buildozer-action@v1
-      id: buildozer
-      with:
-        workdir: .
-        buildozer_version: stable
-        command: buildozer android debug
+    - name: Install Python dependencies
+      run: |
+        python3 -m pip install --upgrade pip
+        pip3 install cython buildozer
+    
+    - name: Build APK
+      run: |
+        buildozer android debug
     
     - name: Upload APK
       uses: actions/upload-artifact@v4
       with:
         name: tetris-apk
-        path: ${{ steps.buildozer.outputs.filename }}
+        path: ./bin/*.apk
