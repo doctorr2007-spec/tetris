@@ -12,20 +12,25 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     
-    - name: Install dependencies
+    - name: Install system dependencies
       run: |
         sudo apt update
-        sudo apt install -y git zip unzip openjdk-17-jdk autoconf libtool
-        pip install buildozer
+        sudo apt install -y git zip unzip openjdk-17-jdk autoconf libtool python3-pip
     
-    - name: Accept SDK licenses (auto)
+    - name: Install Python dependencies
+      run: |
+        pip install --upgrade pip
+        pip install buildozer cython==0.29.36
+    
+    - name: Accept Android SDK licenses (auto)
       run: |
         mkdir -p ~/.android
         echo "### User License for Android SDK" > ~/.android/repositories.cfg
-        yes | ~/../buildozer/android/platform/android-sdk/tools/bin/sdkmanager --licenses 2>/dev/null || echo "Licenses accepted or already in place"
+        yes | $HOME/.buildozer/android/platform/android-sdk/tools/bin/sdkmanager --licenses 2>/dev/null || true
     
-    - name: Build APK
-      run: buildozer android debug
+    - name: Build APK with buildozer
+      run: |
+        buildozer android debug
     
     - name: Upload APK
       uses: actions/upload-artifact@v4
