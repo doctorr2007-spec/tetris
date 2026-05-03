@@ -14,17 +14,17 @@ presplash.filename =
 source.dir = .
 source.include_exts = py,png,jpg,kv,atlas
 
-requirements = python3==3.11.0,kivy==2.1.0,android
+requirements = python3,kivy==2.1.0,android
 
 orientation = portrait
 android.permissions = INTERNET
 
 android.api = 30
 android.minapi = 21
-android.ndk = 25b
+android.ndk = 23b
 android.sdk = 30
 
-p4a.branch = develop
+p4a.branch = master
 
 android.accept_sdk_license = True
 log_level = 2
