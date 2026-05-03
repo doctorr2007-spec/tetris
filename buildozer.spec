@@ -8,7 +8,6 @@ description = Classic Tetris Game for Android
 author = Your Name
 author.email = your.email@example.com
 
-# Убираем требование иконки (чтобы не было ошибок)
 icon.filename = 
 presplash.filename = 
 
@@ -20,13 +19,11 @@ requirements = python3,kivy==2.1.0,android,cython
 orientation = portrait
 android.permissions = INTERNET
 
-# ОБНОВЛЁННЫЕ ВЕРСИИ — ЭТО ВАЖНО!
 android.api = 30
 android.minapi = 21
-android.ndk = 25b           # ← было 23b, теперь 25b
+android.ndk = 25b
 android.sdk = 30
 
-# Важно для новых NDK
 p4a.branch = develop
 
 android.accept_sdk_license = True
@@ -34,8 +31,7 @@ log_level = 2
 android.archs = arm64-v8a, armeabi-v7a
 fullscreen = 1
 
-# Фикс для gradle
-android.gradle_dependencies = 'com.android.support:support-annotations:28.0.0'
+android.gradle_dependencies = com.android.support:support-annotations:28.0.0
 
 [buildozer]
 
