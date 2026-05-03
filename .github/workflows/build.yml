@@ -1,32 +1,39 @@
-name: Build Android APK
+name: Build APK
 
 on:
+  push:
+    branches: [ main ]
   workflow_dispatch:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
-
+    runs-on: ubuntu-22.04
+    
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Install system packages
-        run: |
-          sudo apt update
-          sudo apt install -y python3-pip git zip unzip openjdk-17-jdk
-
-      - name: Install Buildozer
-        run: |
-          pip3 install --user buildozer cython
-
-      - name: Build APK
-        run: |
-          buildozer init || true
-          buildozer -v android debug
-
-      - name: Upload APK
-        uses: actions/upload-artifact@v4
-        with:
-          name: apk
-          path: bin/*.apk
+    - name: Checkout code
+      uses: actions/checkout@v4   # ← ИСПРАВЛЕНО: было v3
+    
+    - name: Install dependencies
+      run: |
+        sudo apt update
+        sudo apt install -y \
+          build-essential git python3-dev ffmpeg \
+          libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev \
+          libsdl2-ttf-dev libportmidi-dev \
+          libswscale-dev libavformat-dev libavcodec-dev \
+          zlib1g-dev
+        pip3 install --user cython
+    
+    - name: Build APK with Buildozer
+      uses: ArtemSBulgakov/buildozer-action@v1
+      id: buildozer
+      with:
+        workdir: .
+        buildozer_version: stable
+        command: buildozer android debug
+    
+    - name: Upload APK
+      uses: actions/upload-artifact@v4   # ← ИСПРАВЛЕНО: было v3
+      with:
+        name: tetris-apk
+        path: ${{ steps.buildozer.outputs.filename }}
