@@ -19,24 +19,17 @@ jobs:
         distribution: 'temurin'
         java-version: '17'
     
-    - name: Install system dependencies
+    - name: Install dependencies
       run: |
         sudo apt update
-        sudo apt install -y \
-          build-essential git python3-dev ffmpeg \
-          libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev \
-          libsdl2-ttf-dev libportmidi-dev \
-          libswscale-dev libavformat-dev libavcodec-dev \
-          zlib1g-dev libgstreamer1.0-0 gstreamer1.0-plugins-base
-    
-    - name: Install Python dependencies
-      run: |
-        python3 -m pip install --upgrade pip
+        sudo apt install -y build-essential git python3-dev ffmpeg \
+          libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev \
+          libportmidi-dev libswscale-dev libavformat-dev libavcodec-dev \
+          zlib1g-dev libgstreamer1.0-0
         pip3 install cython buildozer
     
     - name: Build APK
-      run: |
-        buildozer android debug
+      run: buildozer android debug
     
     - name: Upload APK
       uses: actions/upload-artifact@v4
