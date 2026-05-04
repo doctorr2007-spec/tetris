@@ -3,37 +3,25 @@
 title = Tetris
 package.name = tetrisgame
 package.domain = org.example
-version = 1.0.0
-description = Classic Tetris Game for Android
-author = Your Name
-author.email = your.email@example.com
-
-icon.filename = 
-presplash.filename = 
-
 source.dir = .
 source.include_exts = py,png,jpg,kv,atlas
-
-requirements = python3==3.9.0,kivy==2.0.0,android
-
+version = 1.0.0
+requirements = python3,kivy==2.0.0,android
 orientation = portrait
-android.permissions = INTERNET
+osx.python_version = 3
+osx.kivy_version = 2.0.0
+fullscreen = 1
 
+# Ключевые изменения для обхода ошибки
 android.api = 30
 android.minapi = 21
 android.ndk = 23b
 android.sdk = 30
 
-p4a.branch = release-2022.12.20
-
 android.accept_sdk_license = True
-log_level = 2
 android.archs = arm64-v8a, armeabi-v7a
-fullscreen = 1
+
+log_level = 2
 
 [buildozer]
-
 log_level = 2
-build_dir = .buildozer
-bin_dir = ./bin
-android.accept_sdk_license = True
